@@ -26,7 +26,7 @@ dependency.
 ## Setup
 
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/calvinlee326/h1b-sponsor-mcp.git
 cd h1b-sponsor-mcp
 uv sync
 ```
