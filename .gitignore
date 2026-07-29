@@ -1,0 +1,32 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+# Test/tool caches
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# Editors
+.vscode/
+.idea/
+
+# macOS
+.DS_Store
+
+# Secrets
+.env
+.env.*
+
+# Data
+# The USCIS export is ~41 MB and is not redistributed here; the committed
+# sample is a 40-row slice in the identical format for tests.
+data/*.csv
+!data/*.sample.csv

@@ -1,0 +1,26 @@
+[project]
+name = "h1b-sponsor-mcp"
+version = "0.1.0"
+description = "MCP server for searching USCIS H-1B Employer Data Hub records"
+license = "MIT"
+license-files = ["LICENSE"]
+readme = "README.md"
+authors = [
+    { name = "Chun-Cheng Lee", email = "calvinlee326@gmail.com" }
+]
+requires-python = ">=3.13"
+dependencies = [
+    "mcp[cli]>=2.0.0",
+]
+
+[project.scripts]
+h1b-sponsor-mcp = "h1b_sponsor_mcp.server:main"
+
+[build-system]
+requires = ["uv_build>=0.12.0,<0.13.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+]
