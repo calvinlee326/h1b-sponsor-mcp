@@ -24,3 +24,7 @@ build-backend = "uv_build"
 dev = [
     "pytest>=9.1.1",
 ]
+
+[tool.uv]
+# ponytail: never pick up system/anaconda Python (x86_64 leftovers broke the venv)
+python-preference = "only-managed"
