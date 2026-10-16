@@ -13,8 +13,8 @@ dependency.
 
 | Kind | Name | Purpose |
 | --- | --- | --- |
-| Tool | `search_sponsors(company_name, limit=10)` | Find employers by full or partial name. Case- and punctuation-insensitive, so `amazon.com` matches `AMAZON COM SERVICES LLC`. Totals are aggregated across all of an employer's offices. |
-| Tool | `get_top_sponsors_by_state(state, limit=10)` | Rank the largest sponsors in one state by approved petitions, counting only petitions filed from offices in that state. |
+| Tool | `search_sponsors(company_name, limit=10, fiscal_year=None)` | Find employers by full or partial name. Case- and punctuation-insensitive, so `amazon.com` matches `AMAZON COM SERVICES LLC`. Totals are aggregated across all of an employer's offices, with breakdowns by petition category and fiscal year. |
+| Tool | `get_top_sponsors_by_state(state, limit=10, fiscal_year=None)` | Rank the largest sponsors in one state by approved petitions, counting only petitions filed from offices in that state. |
 | Resource | `h1b://summary` | Dataset coverage, unique employer count, national approval/denial totals and approval rate. |
 
 ## Requirements
@@ -162,8 +162,9 @@ npx @modelcontextprotocol/inspector@latest \
 uv run pytest
 ```
 
-Tests run against the real USCIS export and skip automatically if
-`data/h1b_employers.csv` is absent.
+Unit tests and tests against `data/h1b_employers.sample.csv` always run;
+full-dataset tests run against `data/h1b_employers.csv` when present and skip
+automatically if it has not been downloaded.
 
 ## How it works
 
@@ -171,11 +172,11 @@ Tests run against the real USCIS export and skip automatically if
 parse of the export:
 
 - `employer_index()` — one entry per employer, summed across every office and
-  fiscal year. Answers "how many people does Google sponsor" (3,629).
+  fiscal year. Answers "how many people does Google sponsor" (14,096).
 - `state_index()` — one entry per (employer, state), grouped by state and
   pre-sorted by approvals. Answers "who sponsors most in Texas" without
   crediting a national employer's company-wide total to every state it appears
-  in (Google is 3,613 in CA and 16 in TX).
+  in (Google is 14,080 in CA and 16 in TX).
 
 Both use `functools.lru_cache`, so the parse and aggregation happen on the first
 tool call rather than at import. This keeps the MCP initialize handshake
